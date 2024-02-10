@@ -26,6 +26,7 @@ Dicas:
 
 
 ![](./assets/images/clean_architecture.webp)
+
 The three main concepts of Clean architecture are:
 
 A arquitetura limpa visa, principalmente, a separação de tudo que é regra de negócio do que é externo a mesma.
