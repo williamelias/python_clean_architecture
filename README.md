@@ -1,9 +1,13 @@
-# Project Overview:
+# Sobre o projeto:
 
 Esse projeto visa o estudo e aplicação (usando linguagem Python) de conceitos relativos ao
 Clean Architecture (arquitetura limpa).
 
-# requirements to run this project
+Ele foi baseado em vários tutoriais e conteúdos obtidos via meio digital, todos referenciados no final desse documento.
+
+<hr>
+
+# Requisitos para rodar os testes
 
 - python (testado com a versão 3.10)
 - pytest (versão especificada no arquivo 'requirements.txt')
@@ -22,12 +26,13 @@ Dicas:
     
     $ pytest .
 
+<hr>
+
 # Noções de Clean Architecture
 
 
 ![](./assets/images/clean_architecture.webp)
 
-The three main concepts of Clean architecture are:
 
 A arquitetura limpa visa, principalmente, a separação de tudo que é regra de negócio do que é externo a mesma.
 Na teoria, a aplicação de um modelo de Clean architecture deveria ter:
@@ -51,36 +56,56 @@ Na teoria, a aplicação de um modelo de Clean architecture deveria ter:
 
 ## Pontos negativos
 
-- Exige entendimento sobre o negócio e suas regras, para definição do core da aplicação
+- Exige entendimento sobre o negócio e suas regras, para definição do core da aplicação.
 
-- Possui maior complexidade inicial em face a um projeto sem sua aplicação.
+- Possui maior complexidade inicial de aplicação.
 
-## Entities (Entidades): 
+## Entities (Domínio): 
 
 Aqui estarão definidas todas as regras de negócio da aplicação, por exemplo:
 
-- se tivermos uma calculadora de contas básicas, salvariamos dentro das entities as operações aritméticas
+Em uma aplicação de Lista de tarefas, poderíamos ter as seguintes entidades e suas regras:
+
+- Entidade Item, que contém: título (maior que 3 letras), descrição (não obrigatória), prioridade (de 1 a 3)
+- Entidade Lista, que contém: proprietário, items (lista de Item)
 
 ## User Case (Caso de uso)
 
 Nesse local estabeleceremos alguns fluxos de uso para a aplicação em questão.
 Aqui estarão regras de negócio na camada da aplicação, essas regras não alteram as regras já feitas nas entidades, mas as usam.
 
-## Adapters (Adaptador)
+Em uma aplicação de Lista de tarefas, poderíamos ter os seguintes casos de uso:
+
+- Criar Lista de tarefas
+- Adicionar item a Lista criada previamente
+- Completar lista de tarefas
+
+##  Adaptadores de Interface - Controllers, Gateways, Presenters (comunicação)
 
 Nessa camada podemos ter, desde serializadoras a repositorios de interação com bancos de dados.
-No caso, vamos exemplificar uma serializadora:
+No caso, vamos exemplificar um Gateway de persistência de dados (sem atrelar com nenhum banco propriamente dito):
 
-- ao obter o resultado de uma soma de dois números uma serializadora poderá formatar a saída como:
-    {
-      'soma': 4,
-      'first_number': 2,
-      'second_number': 2
-    }
-
-## Views ()
+- Gateway de persistência:
+  - será uma interface
+  - Terá três métodos
+      - armazenar Item
+      - deletar Item
+      - listar todos Itens para uma Lista
+   
+Dessa maneira, seja qualquer a implementação (postgres, sqlite ou até armazenamento em memória com redis cache)
+teremos esse gateway que define as interações desejadas
 
 
 # References
 
 https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6
+
+https://www.alura.com.br/artigos/mer-e-der-funcoes
+
+https://noplacelikelocalhost.medium.com/testing-crud-operations-with-sqlite-a-time-saving-guide-for-developers-7c74405d63d5
+
+https://docs.sqlalchemy.org/en/20/orm/quickstart.html
+
+https://fastapi.tiangolo.com/tutorial/sql-databases/
+
+https://macoratti.net/21/10/net_cleanarch1.htm
