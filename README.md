@@ -26,6 +26,10 @@ Dicas:
     
     $ pytest .
 
+- Gerar MER atualizado:
+
+    $ python3 generate_mer.py
+
 <hr>
 
 # Noções de Clean Architecture
