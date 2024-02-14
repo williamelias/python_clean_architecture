@@ -1,7 +1,5 @@
 import pytest
-from clean_project.entities import item
-from entities import todo_list, priority, owner
-from clean_project.entities.exceptions import tem_exceptions
+from clean_project.entities import todo_list, owner, todo_item, exceptions
 
 
 @pytest.fixture
@@ -16,14 +14,14 @@ def empty_todo_list(owner_instance):
 
 @pytest.fixture
 def priorized_items():
-    first_item = item.Item(
-        title="first", description="first", priority=priority.Priority.LOW
+    first_item = todo_item.Item(
+        title="first", description="first", priority=todo_item.Priority.LOW
     )
-    second_item = item.Item(
-        title="second", description="second", priority=priority.Priority.MIDDLE
+    second_item = todo_item.Item(
+        title="second", description="second", priority=todo_item.Priority.MIDDLE
     )
-    third_item = item.Item(
-        title="third", description="third", priority=priority.Priority.HIGHEST
+    third_item = todo_item.Item(
+        title="third", description="third", priority=todo_item.Priority.HIGHEST
     )
     items = [first_item, second_item, third_item]
     return items
@@ -41,7 +39,7 @@ def test_add_with_duplicated_item_should_return_exception(
     empty_todo_list, priorized_items
 ):
     first_item, second_item, _ = priorized_items
-    with pytest.raises(expected_exception=tem_exceptions.DuplicatedItemException):
+    with pytest.raises(expected_exception=exceptions.DuplicatedItemException):
         empty_todo_list.add(item=first_item)
         empty_todo_list.add(item=first_item)
         empty_todo_list.add(item=second_item)

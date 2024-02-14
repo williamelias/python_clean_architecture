@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  memcached:
+    image: memcached:latest
+    container_name: mem_cache
+    ports:
+      - 11211:11211

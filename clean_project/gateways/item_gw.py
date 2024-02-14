@@ -1,8 +1,20 @@
 import abc
-from clean_project.entities.item import Item
+from clean_project.entities.base_interface import EntityI
 
 
-class ItemGateway(metaclass=abc.ABCMeta):
+class GenericGateway(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    def create(item: Item):
+    def create(item: EntityI):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def update(item: EntityI):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get(item: EntityI):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def delete(item: EntityI):
         raise NotImplementedError

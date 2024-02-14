@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from entities.priority import Priority
 
 
 @dataclass

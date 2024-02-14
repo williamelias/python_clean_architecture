@@ -1,8 +1,6 @@
 import pytest
-from database import base
-from database import models
+from clean_project.database import base, models
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
@@ -17,7 +15,7 @@ def db():
 
 
 @pytest.mark.usefixtures("db")
-def test_repository_creating_item(db):
+def test_orm_repository_creating_item(db):
     item = {"title": "title", "description": "description", "priority": "prioridade"}
     db_item = models.Item(**item)
     db.add(instance=db_item)

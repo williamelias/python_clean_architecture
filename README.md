@@ -97,7 +97,7 @@ No caso, vamos exemplificar um Gateway de persistência de dados (sem atrelar co
       - listar todos Itens para uma Lista
    
 Dessa maneira, seja qualquer a implementação (postgres, sqlite ou até armazenamento em memória com redis cache)
-teremos esse gateway que define as interações desejadas
+teremos esse gateway que define as interações desejadas.
 
 
 # References

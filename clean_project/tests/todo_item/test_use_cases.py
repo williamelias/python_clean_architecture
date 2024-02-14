@@ -1,7 +1,7 @@
 from unittest import mock
 import pytest
-from entities.priority import Priority
-from user_cases.item_us import CreateItemUS
+from clean_project.entities.todo_item import Priority
+from clean_project.user_cases.item_us import CreateItemUS
 
 
 @pytest.fixture()

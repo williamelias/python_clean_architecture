@@ -1,11 +1,18 @@
-from . import priority
-from .exceptions import tem_exceptions
 import uuid
+from clean_project.entities.base_interface import EntityI
+from clean_project.entities.exceptions import item_exceptions
+import enum
 
 
-class Item:
+class Priority(enum.Enum):
+    LOW = 1
+    MIDDLE = 2
+    HIGHEST = 3
+
+
+class Item(EntityI):
     def __init__(
-        self, title: str, description: str, priority: priority.Priority
+        self, title: str, description: str, priority: Priority
     ) -> None:
         self.__description = description
         self.__title = self.set_title(title=title)
@@ -18,7 +25,7 @@ class Item:
 
     def set_title(self, title: str):
         if len(title) < 3:
-            raise tem_exceptions.TitleWithInvalidSizeException()
+            raise item_exceptions.TitleWithInvalidSizeException()
         return title
 
     def __str__(self) -> str:
@@ -70,11 +77,11 @@ class Item:
         return self.__priority
 
     def get_uuid(self):
-        return self.__uuid
+        return self.__uuid.__str__()
 
     def __dict__(self):
         return {
-            "uuid": self.get_id(),
+            "uuid": self.get_uuid(),
             "title": self.get_title(),
             "description": self.get_description(),
             "checked": self.get_checked(),
