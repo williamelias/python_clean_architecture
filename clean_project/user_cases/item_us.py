@@ -1,7 +1,7 @@
 from . import base
 from clean_project.entities.item import Item
 from clean_project.gateways.item_gw import ItemGateway
-from .todo_item_dtos import CreateItemInputDTO
+from .item_dtos import CreateItemInputDTO
 
 
 class CreateItemUS(base.UserCaseInterface):

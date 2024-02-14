@@ -6,4 +6,4 @@ from entities.priority import Priority
 class CreateItemInputDTO:
     title: str
     description: str
-    priority: Priority
+    priority: str

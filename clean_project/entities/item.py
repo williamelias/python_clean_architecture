@@ -11,7 +11,10 @@ class Item:
         self.__title = self.set_title(title=title)
         self.__priority = priority
         self.__checked = False
-        self.__id = uuid.uuid4()
+        self.__uuid = uuid.uuid4()
+
+    def get_checked(self):
+        return self.__checked
 
     def set_title(self, title: str):
         if len(title) < 3:
@@ -66,5 +69,14 @@ class Item:
     def get_priority(self):
         return self.__priority
 
-    def get_id(self):
-        return self.__id
+    def get_uuid(self):
+        return self.__uuid
+
+    def __dict__(self):
+        return {
+            "uuid": self.get_id(),
+            "title": self.get_title(),
+            "description": self.get_description(),
+            "checked": self.get_checked(),
+            "priority": self.get_priority(),
+        }

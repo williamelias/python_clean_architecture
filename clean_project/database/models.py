@@ -18,20 +18,20 @@ class Item(Base):
     description = Column(String)
     checked = Column(Boolean, default=True)
     priority = Column(Integer, default=None)
-    # todo_list_id = Column(ForeignKey("todo_list.id"))
+    todo_list_id = Column(ForeignKey("todo_list.id"))
 
 
-# class TodoList(Base):
-#     __tablename__ = "todo_list"
-#     id = Column(Integer, primary_key=True)
+class TodoList(Base):
+    __tablename__ = "todo_list"
+    id = Column(Integer, primary_key=True)
 
-#     items: Mapped[List["Item"]] = relationship()
-#     title = Column(String, index=True)
-#     owner_id = Column(ForeignKey("owner.id"))
-#     owner: Mapped[List["Owner"]] = relationship()
+    items: Mapped[List["Item"]] = relationship()
+    title = Column(String, index=True)
+    owner_id = Column(ForeignKey("owner.id"))
+    owner: Mapped[List["Owner"]] = relationship()
 
 
-# class Owner(Base):
-#     __tablename__ = "owner"
-#     id = Column(Integer, primary_key=True)
-#     name = Column(String, unique=True, index=True)
+class Owner(Base):
+    __tablename__ = "owner"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True, index=True)
