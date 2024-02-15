@@ -19,7 +19,9 @@ def low_task_item(low_task_content):
 
 def test_title_must_return_exception_when_less_than_3_letters(low_task_content):
     with pytest.raises(
-        expected_exception=(exceptions.item_exceptions.TitleWithInvalidSizeException)
+        expected_exception=(
+            exceptions.item_exceptions.ItemTitleWithInvalidSizeException
+        )
     ):
         low_task_content["title"] = "a"
         Item(**low_task_content)
@@ -30,7 +32,7 @@ def test_content_of_item(low_task_item, low_task_content):
     assert low_task_content["title"] == low_task_item.get_title()
     assert low_task_content["description"] == (low_task_item.get_description())
     assert low_task_content["priority"] == low_task_item.get_priority()
-    assert low_task_item.get_id() is not None
+    assert low_task_item.get_uuid() is not None
 
 
 @pytest.mark.parametrize(

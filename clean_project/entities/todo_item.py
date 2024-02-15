@@ -25,7 +25,7 @@ class Item(EntityI):
 
     def set_title(self, title: str):
         if len(title) < 3:
-            raise item_exceptions.TitleWithInvalidSizeException()
+            raise item_exceptions.ItemTitleWithInvalidSizeException()
         return title
 
     def __str__(self) -> str:

@@ -6,6 +6,12 @@ from clean_project.user_cases.item_us import CreateItemUS
 
 @pytest.fixture()
 def create_todo_gateway():
+    """
+    generate fake gateway with
+    fake .create method
+    Yields:
+        mock.Mock(): mocked gateway
+    """
     gateway = mock.Mock()
     gateway.create = lambda x: x
     yield gateway

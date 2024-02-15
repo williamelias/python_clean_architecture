@@ -4,17 +4,17 @@ from clean_project.entities.base_interface import EntityI
 
 class GenericGateway(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    def create(item: EntityI):
+    def create(entity: EntityI):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def update(item: EntityI):
+    def update(entity: EntityI):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get(item: EntityI):
+    def get(entity: EntityI):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def delete(item: EntityI):
+    def delete(entity: EntityI):
         raise NotImplementedError

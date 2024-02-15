@@ -9,7 +9,7 @@ def owner_instance():
 
 @pytest.fixture
 def empty_todo_list(owner_instance):
-    yield todo_list.TodoList(owner=owner_instance)
+    yield todo_list.TodoList(owner=owner_instance, title="empty_todo_title")
 
 
 @pytest.fixture
@@ -39,7 +39,9 @@ def test_add_with_duplicated_item_should_return_exception(
     empty_todo_list, priorized_items
 ):
     first_item, second_item, _ = priorized_items
-    with pytest.raises(expected_exception=exceptions.DuplicatedItemException):
+    with pytest.raises(
+        expected_exception=exceptions.item_exceptions.DuplicatedItemException
+    ):
         empty_todo_list.add(item=first_item)
         empty_todo_list.add(item=first_item)
         empty_todo_list.add(item=second_item)

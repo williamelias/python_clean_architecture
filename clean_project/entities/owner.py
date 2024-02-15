@@ -17,7 +17,4 @@ class Owner(EntityI):
         return self.__uuid.__str__()
 
     def __dict__(self):
-        return {
-            "uuid": self.get_uuid(),
-            "name": self.get_name()
-        }
+        return {"uuid": self.get_uuid(), "name": self.get_name()}
