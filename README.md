@@ -24,11 +24,11 @@ Dicas:
 
 - execução dos testes:
     
-    $ pytest .
+    $ make test
 
 - Gerar MER atualizado:
 
-    $ python3 generate_mer.py
+    $ make mer
 
 <hr>
 
