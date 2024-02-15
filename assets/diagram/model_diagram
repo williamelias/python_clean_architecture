@@ -21,5 +21,33 @@ digraph {
                          </TR><TR>
                          <TD BGCOLOR="#BBDEFB">priority</TD>
                          <TD BGCOLOR="#BBDEFB">INTEGER ()</TD>
+                         </TR><TR>
+                         <TD BGCOLOR="#BBDEFB">todo_list_id</TD>
+                         <TD BGCOLOR="#BBDEFB">INTEGER ()</TD>
                          </TR></TABLE>> URL="http://Item_details.html"]
+	TodoList [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+        <TR><TD COLSPAN="2" BGCOLOR="#3F51B5"><FONT COLOR="white">TodoList</FONT></TD></TR>
+        <TR>
+                         <TD BGCOLOR="#BBDEFB">id</TD>
+                         <TD BGCOLOR="#BBDEFB">INTEGER (PK)</TD>
+                         </TR><TR>
+                         <TD BGCOLOR="#BBDEFB">title</TD>
+                         <TD BGCOLOR="#BBDEFB">VARCHAR (Index)</TD>
+                         </TR><TR>
+                         <TD BGCOLOR="#BBDEFB">owner_id</TD>
+                         <TD BGCOLOR="#BBDEFB">INTEGER ()</TD>
+                         </TR></TABLE>> URL="http://TodoList_details.html"]
+	TodoList -> Item [label=items color="#1E88E5" style=dashed tooltip="Relation between TodoList and Item"]
+	TodoList -> Owner [label=owner color="#1E88E5" style=dashed tooltip="Relation between TodoList and Owner"]
+	Owner [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+        <TR><TD COLSPAN="2" BGCOLOR="#3F51B5"><FONT COLOR="white">Owner</FONT></TD></TR>
+        <TR>
+                         <TD BGCOLOR="#BBDEFB">id</TD>
+                         <TD BGCOLOR="#BBDEFB">INTEGER (PK)</TD>
+                         </TR><TR>
+                         <TD BGCOLOR="#BBDEFB">name</TD>
+                         <TD BGCOLOR="#BBDEFB">VARCHAR (Unique,Index)</TD>
+                         </TR></TABLE>> URL="http://Owner_details.html"]
 }

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  clean_project:
+    build: .
+    container_name: clean_project
+    volumes:
+      - .:/opt/app
+
+  memcached:
+    image: memcached:latest
+    container_name: mem_cache
+    ports:
+      - 11211:11211
+  
+  mongo:
+    image: mongo
+    container_name: mongo_service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password

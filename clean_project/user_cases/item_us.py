@@ -1,11 +1,11 @@
 from . import base
-from clean_project.entities.item import Item
-from clean_project.gateways.item_gw import ItemGateway
-from .todo_item_dtos import CreateItemInputDTO
+from clean_project.entities.todo_item import Item
+from clean_project.gateways.item_gw import GenericGateway
+from .item_dtos import CreateItemInputDTO
 
 
 class CreateItemUS(base.UserCaseInterface):
-    def __init__(self, gateway: ItemGateway) -> None:
+    def __init__(self, gateway: GenericGateway) -> None:
         self.gateway = gateway
 
     def execute(self, input: CreateItemInputDTO):

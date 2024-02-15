@@ -9,7 +9,7 @@ from sqlalchemy_data_model_visualizer import (
 if __name__ == "__main__":
     # List of models to create visual data
     # models = [Item, TodoList, Owner]
-    models = [md.Item]
+    models = [md.Item, md.TodoList, md.Owner]
 
     base_path_file = "./assets/diagram/model_diagram"
 
