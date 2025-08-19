@@ -1,115 +1,128 @@
-# Sobre o projeto:
 
-Esse projeto visa o estudo e aplicação (usando linguagem Python) de conceitos relativos ao
-Clean Architecture (arquitetura limpa).
+# About the Project
 
-Ele foi baseado em vários tutoriais e conteúdos obtidos via meio digital, todos referenciados no final desse documento.
+This project aims to study and apply (using Python) concepts related to **Clean Architecture**.
 
-<hr>
-
-# Requisitos para rodar os testes
-
-- python (testado com a versão 3.10)
-- pytest (versão especificada no arquivo 'requirements.txt')
-
-Dicas:
-
-- Crie um ambiente virtual para executar de forma isolada:
-  
-    $ pip3 install virtualenv
-
-    $ virtulenv -p python3 .venv
-
-    $ source .venv/bin/activate
-
-- execução dos testes:
-    
-    $ make test
-
-- Gerar MER atualizado:
-
-    $ make mer
+It was based on several tutorials and digital content, all referenced at the end of this document.
 
 <hr>
 
-# Noções de Clean Architecture
+# Requirements to Run the Tests
 
+* Python (tested with version 3.10)
+* Pytest (version specified in the `requirements.txt` file)
+
+Tips:
+
+* Create a virtual environment to run everything in isolation:
+
+  ```bash
+  $ pip3 install virtualenv
+
+  $ virtualenv -p python3 .venv
+
+  $ source .venv/bin/activate
+  ```
+
+* Run the tests:
+
+  ```bash
+  $ make test
+  ```
+
+* Generate an updated MER:
+
+  ```bash
+  $ make mer
+  ```
+
+<hr>
+
+# Clean Architecture Basics
 
 ![](./assets/images/clean_architecture.webp)
 
+Clean Architecture mainly aims at separating business rules from everything external to them.
+In theory, applying a Clean Architecture model should ensure:
 
-A arquitetura limpa visa, principalmente, a separação de tudo que é regra de negócio do que é externo a mesma.
-Na teoria, a aplicação de um modelo de Clean architecture deveria ter:
+* framework independence
+* user interface independence
+* database independence
+* independence from any external elements
+* testability
 
-- independência de framework
-- independência de interface de usuário
-- independência de banco de dados
-- independência de qualquer elemento externo
-- testabilidade
+## Pros
 
-## Pontos positivos
+* Separation and encapsulation of business rules.
 
-- Separação da regra de negócio, encapsulamento da mesma.
-  - Podemos fazer um parêntese com o 'S' do 'SOLID', pois estamos aplicando , de certa forma, o 'Single responsability principle' no contexto de arquitetura.
+  * This can be related to the **“S” in SOLID**, since we are, in a way, applying the **Single Responsibility Principle** in the architectural context.
 
-- As regras de negócio podem ser testadas sem a necessidade de uso de interfaces e devemos ter isso como norte, pois uma interface de acesso a aplicação pode mudar, por exemplo: antes via web, agora via console.
+* Business rules can be tested without the need for user interfaces, and this should guide us, because an access interface can change (e.g., before via web, now via console).
 
-- Maior facilidade na troca de banco de dados, pois não é usada explicitamente uma lib para definição das regras de negócios atreladas ao banco.
+* Easier database switching, since no specific library is explicitly tied to the definition of business rules.
 
-- As regras de negócio não 'veem' o mundo externo. Com isso obtivemos uma visão front up .
+* Business rules do not “see” the outside world. With this, we achieve a **front-up view**.
 
-## Pontos negativos
+## Cons
 
-- Exige entendimento sobre o negócio e suas regras, para definição do core da aplicação.
+* Requires an understanding of the business domain and its rules to define the application core.
+* Has greater initial complexity in implementation.
 
-- Possui maior complexidade inicial de aplicação.
+## Entities (Domain)
 
-## Entities (Domínio): 
+This is where all the business rules of the application are defined.
 
-Aqui estarão definidas todas as regras de negócio da aplicação, por exemplo:
+For example, in a **to-do list application**, we could have the following entities and rules:
 
-Em uma aplicação de Lista de tarefas, poderíamos ter as seguintes entidades e suas regras:
+* **Entity Item**, containing:
 
-- Entidade Item, que contém: título (maior que 3 letras), descrição (não obrigatória), prioridade (de 1 a 3)
-- Entidade Lista, que contém: proprietário, items (lista de Item)
+  * title (longer than 3 letters)
+  * description (optional)
+  * priority (from 1 to 3)
 
-## User Case (Caso de uso)
+* **Entity List**, containing:
 
-Nesse local estabeleceremos alguns fluxos de uso para a aplicação em questão.
-Aqui estarão regras de negócio na camada da aplicação, essas regras não alteram as regras já feitas nas entidades, mas as usam.
+  * owner
+  * items (list of Item)
 
-Em uma aplicação de Lista de tarefas, poderíamos ter os seguintes casos de uso:
+## Use Case
 
-- Criar Lista de tarefas
-- Adicionar item a Lista criada previamente
-- Completar lista de tarefas
+In this section, we define some usage flows of the application.
+Here we place business rules at the **application layer**. These rules do not change the entities’ rules but use them.
 
-##  Adaptadores de Interface - Controllers, Gateways, Presenters (comunicação)
+In a **to-do list application**, the use cases could be:
 
-Nessa camada podemos ter, desde serializadoras a repositorios de interação com bancos de dados.
-No caso, vamos exemplificar um Gateway de persistência de dados (sem atrelar com nenhum banco propriamente dito):
+* Create a task list
+* Add an item to a previously created list
+* Complete a task list
 
-- Gateway de persistência:
-  - será uma interface
-  - Terá três métodos
-      - armazenar Item
-      - deletar Item
-      - listar todos Itens para uma Lista
-   
-Dessa maneira, seja qualquer a implementação (postgres, sqlite ou até armazenamento em memória com redis cache)
-teremos esse gateway que define as interações desejadas.
+## Interface Adapters — Controllers, Gateways, Presenters (communication)
 
+This layer may include anything from serializers to repositories for database interaction.
+In this case, let’s use as an example a **Persistence Gateway** (not tied to any specific database):
+
+* **Persistence Gateway**:
+
+  * will be an interface
+  * will have three methods:
+
+    * store Item
+    * delete Item
+    * list all Items in a List
+
+This way, regardless of the implementation (Postgres, SQLite, or even in-memory storage with Redis cache),
+we will have this gateway defining the desired interactions.
+
+---
 
 # References
 
-https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6
+* [https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6](https://medium.com/luizalabs/descomplicando-a-clean-architecture-cf4dfc4a1ac6)
+* [https://www.alura.com.br/artigos/mer-e-der-funcoes](https://www.alura.com.br/artigos/mer-e-der-funcoes)
+* [https://noplacelikelocalhost.medium.com/testing-crud-operations-with-sqlite-a-time-saving-guide-for-developers-7c74405d63d5](https://noplacelikelocalhost.medium.com/testing-crud-operations-with-sqlite-a-time-saving-guide-for-developers-7c74405d63d5)
+* [https://docs.sqlalchemy.org/en/20/orm/quickstart.html](https://docs.sqlalchemy.org/en/20/orm/quickstart.html)
+* [https://fastapi.tiangolo.com/tutorial/sql-databases/](https://fastapi.tiangolo.com/tutorial/sql-databases/)
+* [https://macoratti.net/21/10/net\_cleanarch1.htm](https://macoratti.net/21/10/net_cleanarch1.htm)
 
-https://www.alura.com.br/artigos/mer-e-der-funcoes
+---
 
-https://noplacelikelocalhost.medium.com/testing-crud-operations-with-sqlite-a-time-saving-guide-for-developers-7c74405d63d5
-
-https://docs.sqlalchemy.org/en/20/orm/quickstart.html
-
-https://fastapi.tiangolo.com/tutorial/sql-databases/
-
-https://macoratti.net/21/10/net_cleanarch1.htm
